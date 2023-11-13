@@ -420,6 +420,41 @@ class CustomClient:
         if r.status_code != 200:
             raise Exception(r.content)
 
+    @stopwatch
+    def delete_revoked_credential_from_wallet(self, credential):
+        headers = json.loads(os.getenv("ISSUER_HEADERS"))
+        headers["Content-Type"] = "application/json"
+
+        issuer_did = os.getenv("CRED_DEF").split(":")[0]
+        schema_parts = os.getenv("SCHEMA").split(":")
+
+        time.sleep(1)
+        
+        credential_id = credential["credential_exchange_id"]
+        connection_id = credential["connection_id"] 
+
+        d_credential = requests.delete(
+            os.getenv("ISSUER_URL") + f'/credential/{credential_id}',
+            json={
+                "credential_id": credential_id
+            }
+        )
+        print("d is ", d_credential)
+        print("d json is ", d_credential.json())
+        if d_credential.status_code != 200:
+            raise Exception(r.content)
+
+
+        d_connection = requests.delete(
+            os.getenv("ISSUER_URL") + f'/connections/{connection_id}',
+            json={
+                "conn_id": connection_id 
+            }
+        )
+        print("d is ", d_connection)
+        print("d json is ", d_connection.json())
+        if d_connection.status_code != 200:
+            raise Exception(r.content)
 
     @stopwatch
     def msg_client(self, connection_id):
