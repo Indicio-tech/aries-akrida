@@ -24,7 +24,7 @@ auto-ping-connection: true
 public-invites: true
 
 # Credentials and Presentations
-preserve-exchange-records: false
+preserve-exchange-records: false # Should delete cred exch records
 auto-store-credential: true
 auto-respond-credential-proposal: true
 auto-respond-credential-offer: true

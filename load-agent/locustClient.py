@@ -367,7 +367,8 @@ class CustomClient:
 
         line = self.readjsonline()
         r = r.json()
-        pres_ex_id = r["presentation_exchange_id"]
+        pres_ex_id = r["presentation_exchange_id"] # keep me around
+        # want to delete^
         # Want to do a for loop
         iteration = 0
         try:
@@ -430,19 +431,20 @@ class CustomClient:
 
         time.sleep(1)
         
-        credential_id = credential["credential_exchange_id"]
+        #credential_id = credential["credential_exchange_id"]
         connection_id = credential["connection_id"] 
 
-        d_credential = requests.delete(
-            os.getenv("ISSUER_URL") + f'/credential/{credential_id}',
-            json={
-                "credential_id": credential_id
-            }
-        )
-        print("d is ", d_credential)
-        print("d json is ", d_credential.json())
-        if d_credential.status_code != 200:
-            raise Exception(r.content)
+        # Probably don't need this
+        # d_credential = requests.delete(
+        #     os.getenv("ISSUER_URL") + f'/credential/{credential_id}',
+        #     json={
+        #         "credential_id": credential_id
+        #     }
+        # )
+        # print("d is ", d_credential)
+        # print("d json is ", d_credential.json())
+        # if d_credential.status_code != 200:
+        #     raise Exception(r.content)
 
 
         d_connection = requests.delete(
