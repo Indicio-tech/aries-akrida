@@ -273,10 +273,10 @@ class CustomClient:
         return line["connection"]
 
     @stopwatch
-    def receive_credential(self, connection_id):
+    def receive_credential(self, connection_id=None, invitation_id=None):
         self.run_command({"cmd": "receiveCredential"})
 
-        r = self.issuer.issue_credential(connection_id)
+        r = self.issuer.issue_credential(connection_id, invitation_id)
 
         line = self.readjsonline()
 
